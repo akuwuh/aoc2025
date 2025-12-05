@@ -14,10 +14,10 @@ def solve(input):
             temp -= distance
         
         if (temp > 100):
-            ans += (temp - 1) // 100 
+            ans += (temp - 1) // 100 # - 1 needed to account for more than 1 rotations that doesn't land on 0 
         elif (temp < 0):
-            diff = (abs(temp) - 1) // 100
-            if (cur > 0):
+            diff = (abs(temp) - 1) // # this is for + 1 rotations
+            if (cur > 0): # for not full rotations that still passed
                 diff += 1
             ans += diff
 
