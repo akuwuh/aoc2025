@@ -10,7 +10,7 @@ use std::fs::read_to_string; // imports just read_to_string
 // i guess this is good for offensive programming -> for critical systems
 
 fn main() {
-    let input = read_to_string("test.txt").unwrap(); // of type String -> data structure that poitns to the text buffer in the heap (it contains the content of the file read i think)
+    let input = read_to_string("input.txt").unwrap(); // of type String -> data structure that poitns to the text buffer in the heap (it contains the content of the file read i think)
 
     // let lines: Vec<&str> = input.lines().collect(); // gotta collect it + we use &str to create a vector of str pointers to the text buffer
 
@@ -71,7 +71,7 @@ fn main() {
         transformed.push(cur_line);
     }
 
-    println!("{:#?}", transformed);
+    // println!("{:#?}", transformed);
 
     let ans = solve(transformed);
     println!("{}", ans);
@@ -82,16 +82,15 @@ fn solve(operations: Vec<Vec<String>>) -> i64 {
     // logic should be the same
 
     let mut total = 0;
-    let n = operations[0].len();
     for operation in &operations {
         // references operations,
 
         let operator = &operation[0]; // * or +
         let mut subtotal = if operator == "*" { 1 } else { 0 }; // conditional assignmetn kinda lit
-        for i in (1..n).rev() {
+        for i in (1..operation.len()).rev() {
             // n - 1 -> 1
             let num = operation[i].trim().parse::<i64>().unwrap_or(0); // once again use unwrap for error handling
-                                                                      // parse is a function with many return types so we must specify
+                                                                       // parse is a function with many return types so we must specify
             if operator == "*" {
                 subtotal *= num;
             } else if operator == "+" {
