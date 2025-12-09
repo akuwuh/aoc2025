@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	data, _ := os.ReadFile("test.txt")
+	data, _ := os.ReadFile("input.txt")
 
 	lines := strings.Split(string(data), "\n")
 	var grid [][]rune
@@ -21,12 +21,13 @@ func main() {
 
 	solve(grid)
 
+	// Build and write output
+	out := ""
 	for _, line := range grid {
-		for _, char := range line {
-			fmt.Printf("%c", char)
-		}
-		fmt.Println()
+		fmt.Println(string(line))
+		out += string(line) + "\n"
 	}
+	os.WriteFile("output.txt", []byte(out), 0644)
 }
 
 func solve(grid [][]rune) { // pass by reference
@@ -57,7 +58,7 @@ func solve(grid [][]rune) { // pass by reference
 				// remove then add + 1 and - 1
 				newActiveCols[c] = false
 				if c-1 >= 0 {
-					newActiveCols[c-1] = true 
+					newActiveCols[c-1] = true
 					grid[r+1][c-1] = '|'
 				}
 				if c+1 < cols {
