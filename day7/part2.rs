@@ -3,7 +3,7 @@
 use std::fs::*; // importing all fs
 
 fn main() {
-    let input = read_to_string("test.txt").unwrap(); // right now its a String at
+    let input = read_to_string("input.txt").unwrap(); // right now its a String at
 
     let grid = input
         .lines()
