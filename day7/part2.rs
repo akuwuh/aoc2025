@@ -12,7 +12,7 @@ fn main() {
         )
         .collect::<Vec<Vec<char>>>(); // holy shit this was hard to rmemeber
 
-    println!("{:#?}", grid);
+    // println!("{:#?}", grid);
 
     let total = solve(grid);
 
@@ -20,7 +20,7 @@ fn main() {
 }
 
 fn solve(grid: Vec<Vec<char>>) -> i64 {
-    let start_col: i64;
+    let mut start_col: usize = 0;
     let cols = grid[0].len();
     let rows = grid.len();
     let mut active_cols: Vec<i64> = vec![0; cols]; // instead of map, we just use an array
@@ -37,7 +37,7 @@ fn solve(grid: Vec<Vec<char>>) -> i64 {
         for c in 0..cols {
             if active_cols[c] > 0 && grid[r][c] == '^' {
                 // need to split
-                if c - 1 >= 0 {
+                if c >= 1 {
                     new_active_cols[c - 1] += active_cols[c]; // will account for cascading anyway
                 }
                 if c + 1 < cols {
